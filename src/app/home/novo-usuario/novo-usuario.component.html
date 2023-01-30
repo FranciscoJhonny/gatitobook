@@ -1,0 +1,69 @@
+<h4 class="text-center">Registre e mostre seu pet ao mundo</h4>
+<div class="col-md-6 mx-auto col-lg-12">
+  <form
+    class="p-4 p-md-6 border rounded-3 bg-light"
+    [formGroup]="novoUsuarioForm"
+    (submit)="cadastrar()"
+  >
+    <div class="form-group mb-3">
+      <input
+        placeholder="e-mail"
+        class="form-control"
+        formControlName="email"
+      />
+      <app-mensagem
+      *ngIf="novoUsuarioForm.get('email')?.errors?.['required']  && novoUsuarioForm.get('email')?.touched"
+      mensagem="E-mail obrigatório"
+      ></app-mensagem>
+      <app-mensagem
+      *ngIf="novoUsuarioForm.get('email')?.errors?.['email'] &&
+      novoUsuarioForm.get('email')?.touched"
+      mensagem="Em-mail no formado incorreto"
+      ></app-mensagem>
+    </div>
+    <div class="form-group mb-3">
+      <input
+        placeholder="Nome Completo"
+        class="form-control"
+        formControlName="fullName"
+      />
+      <app-mensagem
+      *ngIf="novoUsuarioForm.get('fullName')?.errors && novoUsuarioForm.get('fullName')?.touched"
+      mensagem="Nome incorreto"
+      ></app-mensagem>
+    </div>
+    <div class="form-group mb-3">
+      <input
+        placeholder="Usuário"
+        class="form-control"
+        formControlName="userName"
+      />
+      <app-mensagem
+      *ngIf="novoUsuarioForm.get('userName')?.errors?.['minusculo'] &&
+      novoUsuarioForm.get('userName')?.touched"
+      mensagem="Usuário deve ser letra minúscula"
+      ></app-mensagem>
+      <app-mensagem
+      *ngIf="novoUsuarioForm.get('userName')?.errors?.['usuarioExistente']"
+      mensagem="Usuário ja existe"
+      ></app-mensagem>
+    </div>
+    <div class="form-group mb-3">
+      <input
+        type="password"
+        placeholder="Senha"
+        class="form-control"
+        formControlName="password"
+      />
+      <app-mensagem
+      *ngIf="novoUsuarioForm.errors?.['senhaIgualUsuario']"
+      mensagem="Senha dever ser diferente do usuário"
+      ></app-mensagem>
+    </div>
+    <button class="w-100 btn btn-lg btn-primary">Cadastro</button>
+    <hr class="my-4" />
+    <small class="text-muted"
+      >Já é um usuário? <a [routerLink]="['']">Faça Login</a></small
+    >
+  </form>
+</div>
